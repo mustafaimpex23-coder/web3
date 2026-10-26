@@ -1,0 +1,49 @@
+{
+  "name": "subway-runner-poc",
+  "private": true,
+  "version": "0.3.2",
+  "description": "Subway Runner Society Engine playable vertical slice with a polished Subway Runner, evidence telemetry, bounded rewards and recovery.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13",
+    "npm": ">=10 <12"
+  },
+  "scripts": {
+    "dev": "vite --open",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check:js": "node scripts/check-js.mjs",
+    "validate": "node scripts/validate-project.mjs",
+    "check": "npm run check:js && npm run validate && npm run frontend:test && npm run game:test && npm run contracts:test && npm run build",
+    "frontend:test": "node scripts/check-frontend.mjs",
+    "game:test": "mocha test/game/**/*.js",
+    "reward-api": "node services/reward-attestor.mjs",
+    "contracts:compile": "node scripts/run-hardhat.mjs compile",
+    "contracts:test": "node scripts/run-hardhat.mjs test",
+    "contracts:coverage": "node scripts/run-hardhat.mjs test --coverage",
+    "contracts:node": "node scripts/run-hardhat.mjs node",
+    "contracts:deploy": "node scripts/run-hardhat.mjs run scripts/deploy-sep.js",
+    "contracts:season": "node scripts/run-hardhat.mjs run scripts/configure-rush-season.js",
+    "contracts:product": "node scripts/run-hardhat.mjs run scripts/advance-product.js",
+    "contracts:sign-receipt": "node scripts/sign-run-receipt.js",
+    "fetch-assets": "node scripts/fetch-cc0-assets.mjs",
+    "audit:prod": "npm audit --omit=dev"
+  },
+  "dependencies": {
+    "@walletconnect/ethereum-provider": "2.23.10",
+    "ethers": "^6.15.0",
+    "three": "^0.180.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ethers": "^4.0.0",
+    "@nomicfoundation/hardhat-ethers-chai-matchers": "^3.0.0",
+    "@nomicfoundation/hardhat-mocha": "^3.0.0",
+    "@nomicfoundation/hardhat-network-helpers": "^3.0.0",
+    "@openzeppelin/contracts": "^5.6.1",
+    "chai": "^5.3.3",
+    "hardhat": "^3.14.0",
+    "solc": "0.8.28",
+    "vite": "8.2.2",
+    "vite-plugin-node-polyfills": "^0.28.0"
+  }
+}
